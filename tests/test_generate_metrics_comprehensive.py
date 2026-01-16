@@ -24,7 +24,7 @@ class TestGenerateMetricsComprehensive(unittest.TestCase):
         self.temp_dir = Path(tempfile.mkdtemp())
         self.structure_file = self.temp_dir / "structure.md"
         self.generated_dir = self.temp_dir / "generated"
-        
+
         structure_content = """```
 project/
 ├─ src/
@@ -32,7 +32,7 @@ project/
 └─ README.md
 ```"""
         self.structure_file.write_text(structure_content, encoding='utf-8')
-        
+
         self.generated_dir.mkdir()
         (self.generated_dir / "project").mkdir()
         (self.generated_dir / "project" / "src").mkdir()
@@ -48,11 +48,11 @@ project/
         """測試包含大量缺失文件的報告"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir / "project"))
         metrics = metrics_calculator.calculate_all_metrics()
-        
+
         # 模擬大量缺失文件（超過10個）
         metrics['file_coverage']['missing_files'] = [f'missing{i}.py' for i in range(15)]
         metrics['file_coverage']['extra_files'] = [f'extra{i}.py' for i in range(15)]
-        
+
         overall_score = (
             metrics['structure_coverage']['overall_coverage'] * 0.3 +
             metrics['file_coverage']['coverage_rate'] * 0.2 +
@@ -63,10 +63,10 @@ project/
             metrics['module_independence']['independence_rate'] * 0.05
         ) * 100
         metrics['overall_score'] = overall_score
-        
+
         output_file = self.temp_dir / "metrics.md"
         report = generate_report(metrics, str(output_file), LANG_EN)
-        
+
         content = output_file.read_text(encoding='utf-8')
         # 應該顯示 "... 還有 X 個"
         self.assertIn('more', content)
@@ -75,7 +75,7 @@ project/
         """測試不同分數範圍的報告"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir / "project"))
         base_metrics = metrics_calculator.calculate_all_metrics()
-        
+
         # 測試良好分數 (80-89)
         metrics = base_metrics.copy()
         metrics['structure_coverage']['overall_coverage'] = 0.85
@@ -85,7 +85,7 @@ project/
         metrics['hierarchy_accuracy']['overall_accuracy'] = 0.75
         metrics['annotation_preservation']['preservation_rate'] = 0.75
         metrics['module_independence']['independence_rate'] = 0.75
-        
+
         overall_score = (
             metrics['structure_coverage']['overall_coverage'] * 0.3 +
             metrics['file_coverage']['coverage_rate'] * 0.2 +
@@ -96,13 +96,13 @@ project/
             metrics['module_independence']['independence_rate'] * 0.05
         ) * 100
         metrics['overall_score'] = overall_score
-        
+
         output_file = self.temp_dir / "metrics_good.md"
         report = generate_report(metrics, str(output_file), LANG_EN)
-        
+
         content = output_file.read_text(encoding='utf-8')
         self.assertIn('Good', content)
-        
+
         # 測試及格分數 (70-79)
         metrics = base_metrics.copy()
         metrics['structure_coverage']['overall_coverage'] = 0.75
@@ -112,7 +112,7 @@ project/
         metrics['hierarchy_accuracy']['overall_accuracy'] = 0.65
         metrics['annotation_preservation']['preservation_rate'] = 0.65
         metrics['module_independence']['independence_rate'] = 0.65
-        
+
         overall_score = (
             metrics['structure_coverage']['overall_coverage'] * 0.3 +
             metrics['file_coverage']['coverage_rate'] * 0.2 +
@@ -123,13 +123,13 @@ project/
             metrics['module_independence']['independence_rate'] * 0.05
         ) * 100
         metrics['overall_score'] = overall_score
-        
+
         output_file = self.temp_dir / "metrics_pass.md"
         report = generate_report(metrics, str(output_file), LANG_EN)
-        
+
         content = output_file.read_text(encoding='utf-8')
         self.assertIn('Pass', content)
-        
+
         # 測試不及格分數 (< 70)
         metrics = base_metrics.copy()
         metrics['structure_coverage']['overall_coverage'] = 0.5
@@ -139,7 +139,7 @@ project/
         metrics['hierarchy_accuracy']['overall_accuracy'] = 0.5
         metrics['annotation_preservation']['preservation_rate'] = 0.5
         metrics['module_independence']['independence_rate'] = 0.5
-        
+
         overall_score = (
             metrics['structure_coverage']['overall_coverage'] * 0.3 +
             metrics['file_coverage']['coverage_rate'] * 0.2 +
@@ -150,10 +150,10 @@ project/
             metrics['module_independence']['independence_rate'] * 0.05
         ) * 100
         metrics['overall_score'] = overall_score
-        
+
         output_file = self.temp_dir / "metrics_fail.md"
         report = generate_report(metrics, str(output_file), LANG_EN)
-        
+
         content = output_file.read_text(encoding='utf-8')
         self.assertIn('Fail', content)
 

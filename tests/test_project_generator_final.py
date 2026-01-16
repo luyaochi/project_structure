@@ -41,10 +41,10 @@ class TestProjectGeneratorFinal(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         config_file = self.output_dir / "project" / "config.yaml"
         self.assertTrue(config_file.exists())
         # 應該使用預設模板
@@ -65,10 +65,10 @@ class TestProjectGeneratorFinal(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         unknown_file = self.output_dir / "project" / "unknown.xyz"
         self.assertTrue(unknown_file.exists())
         # 應該使用預設內容

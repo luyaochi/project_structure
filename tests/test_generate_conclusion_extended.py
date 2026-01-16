@@ -23,7 +23,7 @@ class TestGenerateConclusionExtended(unittest.TestCase):
         self.temp_dir = Path(tempfile.mkdtemp())
         self.structure_file = self.temp_dir / "structure.md"
         self.generated_dir = self.temp_dir / "generated"
-        
+
         structure_content = """```
 project/
 ├─ src/
@@ -31,7 +31,7 @@ project/
 └─ README.md
 ```"""
         self.structure_file.write_text(structure_content, encoding='utf-8')
-        
+
         self.generated_dir.mkdir()
         (self.generated_dir / "project").mkdir()
         (self.generated_dir / "project" / "src").mkdir()
@@ -53,7 +53,7 @@ project/
             str(output_file),
             LANG_EN
         )
-        
+
         content = output_file.read_text(encoding='utf-8')
         # 檢查報告是否包含基本內容
         self.assertIn('Project', content)
@@ -62,14 +62,14 @@ project/
     def test_main_function_without_output(self):
         """測試 main 函數不指定輸出"""
         import sys
-        
+
         test_args = [
             'generate_conclusion.py',
             '--structure', str(self.structure_file),
             '--generated', str(self.generated_dir / "project"),
             '--lang', 'en'
         ]
-        
+
         with patch.object(sys, 'argv', test_args):
             try:
                 main()
@@ -83,7 +83,7 @@ project/
     def test_main_function_single_lang_with_output(self):
         """測試 main 函數單一語言並指定輸出"""
         import sys
-        
+
         test_args = [
             'generate_conclusion.py',
             '--structure', str(self.structure_file),
@@ -91,7 +91,7 @@ project/
             '--lang', 'zh-CN',
             '--output', str(self.temp_dir / "CONCLUSION.md")
         ]
-        
+
         with patch.object(sys, 'argv', test_args):
             try:
                 main()

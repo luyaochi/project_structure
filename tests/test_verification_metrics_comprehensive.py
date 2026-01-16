@@ -21,7 +21,7 @@ class TestVerificationMetricsComprehensive(unittest.TestCase):
         self.temp_dir = Path(tempfile.mkdtemp())
         self.structure_file = self.temp_dir / "structure.md"
         self.generated_dir = self.temp_dir / "generated"
-        
+
         # 創建符合 system/project1 結構的文件，包含註解
         structure_content = """```
 system/
@@ -33,7 +33,7 @@ system/
    └─ README.md ← 說明文件
 ```"""
         self.structure_file.write_text(structure_content, encoding='utf-8')
-        
+
         # 創建生成的專案結構（符合 system/project1 格式）
         self.generated_dir.mkdir()
         system_dir = self.generated_dir / "system"
@@ -44,7 +44,7 @@ system/
         core_dir.mkdir()
         src_dir = core_dir / "src"
         src_dir.mkdir()
-        
+
         # 創建文件，包含註解
         (src_dir / "main.py").write_text("# main.py\n# 主程式\n", encoding='utf-8')
         (core_dir / "pyproject.toml").write_text(
@@ -62,7 +62,7 @@ system/
         """測試獲取實際文件列表"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         files = metrics_calculator._get_actual_files()
-        
+
         self.assertIsInstance(files, list)
         # 應該包含生成的文件
         self.assertGreater(len(files), 0)
@@ -74,7 +74,7 @@ system/
         """測試獲取實際目錄列表"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         directories = metrics_calculator._get_actual_directories()
-        
+
         self.assertIsInstance(directories, list)
         # 應該包含生成的目錄
         self.assertGreater(len(directories), 0)
@@ -83,7 +83,7 @@ system/
         """測試檢查 pyproject.toml 文件"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         result = metrics_calculator._check_pyproject_toml()
-        
+
         self.assertIn('checks', result)
         self.assertIsInstance(result['checks'], list)
         # 應該有檢查結果
@@ -104,7 +104,7 @@ system/
 ```"""
         package_structure = self.temp_dir / "package_structure.md"
         package_structure.write_text(structure_with_package, encoding='utf-8')
-        
+
         # 創建包含 package.json 的專案
         package_project = self.temp_dir / "package_project"
         package_project.mkdir()
@@ -118,10 +118,10 @@ system/
             '{\n  "name": "frontend",\n  "version": "1.0.0"\n}',
             encoding='utf-8'
         )
-        
+
         metrics_calculator = VerificationMetrics(str(package_structure), str(package_project))
         result = metrics_calculator._check_package_json()
-        
+
         self.assertIn('checks', result)
         self.assertIsInstance(result['checks'], list)
 
@@ -129,7 +129,7 @@ system/
         """測試註解保留（包含異常處理）"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         preservation = metrics_calculator.calculate_annotation_preservation()
-        
+
         self.assertIn('expected_count', preservation)
         self.assertIn('preserved_count', preservation)
         self.assertIn('preservation_rate', preservation)
@@ -139,7 +139,7 @@ system/
         nonexistent_dir = self.temp_dir / "nonexistent"
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(nonexistent_dir))
         files = metrics_calculator._get_actual_files()
-        
+
         # 路徑不存在時應該返回空列表
         self.assertEqual(files, [])
 
@@ -148,7 +148,7 @@ system/
         nonexistent_dir = self.temp_dir / "nonexistent"
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(nonexistent_dir))
         directories = metrics_calculator._get_actual_directories()
-        
+
         # 路徑不存在時應該返回空列表
         self.assertEqual(directories, [])
 

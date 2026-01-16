@@ -25,12 +25,12 @@ project/
 ```"""
         test_file = Path(__file__).parent / "test_file_list.md"
         test_file.write_text(structure_content, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(test_file))
             parser.parse()
             file_list = parser.get_file_list()
-            
+
             self.assertIsInstance(file_list, list)
             self.assertGreater(len(file_list), 0)
             # 檢查返回格式
@@ -52,12 +52,12 @@ project/
 ```"""
         test_file = Path(__file__).parent / "test_dir_list.md"
         test_file.write_text(structure_content, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(test_file))
             parser.parse()
             dir_list = parser.get_directory_list()
-            
+
             self.assertIsInstance(dir_list, list)
             self.assertGreater(len(dir_list), 0)
             # 檢查是否包含預期的目錄（可能是完整路徑）
@@ -77,7 +77,7 @@ project/
 ```"""
         text_file = Path(__file__).parent / "test_text.md"
         text_file.write_text(structure_with_text, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(text_file))
             structure = parser.parse()
@@ -95,7 +95,7 @@ project/tests/test_main.py
 ```"""
         path_file = Path(__file__).parent / "test_path.md"
         path_file.write_text(structure_with_path, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(path_file))
             structure = parser.parse()
@@ -112,7 +112,7 @@ project/
 ```"""
         arrow_file = Path(__file__).parent / "test_arrow.md"
         arrow_file.write_text(structure_with_arrow, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(arrow_file))
             structure = parser.parse()
@@ -127,12 +127,12 @@ project/
         structure_with_empty = """```
 project/
 ├─ src/
-│  
+│
 │  └─ main.py
 ```"""
         empty_file = Path(__file__).parent / "test_empty_block.md"
         empty_file.write_text(structure_with_empty, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(empty_file))
             structure = parser.parse()

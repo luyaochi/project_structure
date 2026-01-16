@@ -22,7 +22,7 @@ class TestVerificationMetricsException(unittest.TestCase):
         self.temp_dir = Path(tempfile.mkdtemp())
         self.structure_file = self.temp_dir / "structure.md"
         self.generated_dir = self.temp_dir / "generated"
-        
+
         structure_content = """```
 system/
 └─ project1/
@@ -35,7 +35,7 @@ system/
    └─ README.md
 ```"""
         self.structure_file.write_text(structure_content, encoding='utf-8')
-        
+
         # 創建生成的專案結構
         self.generated_dir.mkdir()
         system_dir = self.generated_dir / "system"
@@ -48,7 +48,7 @@ system/
         frontend_dir.mkdir()
         src_dir = project1_dir / "src"
         src_dir.mkdir()
-        
+
         # 創建文件
         (core_dir / "pyproject.toml").write_text(
             "[build-system]\nrequires = [\"setuptools\"]\n\n[project]\nname = \"core\"\n",
@@ -70,7 +70,7 @@ system/
         """測試檢查 Python 文件（包含異常處理）"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         result = metrics_calculator._check_python_files()
-        
+
         self.assertIn('checks', result)
         # 即使有異常也應該返回結果
 
@@ -78,7 +78,7 @@ system/
         """測試檢查 README 文件（包含異常處理）"""
         metrics_calculator = VerificationMetrics(str(self.structure_file), str(self.generated_dir))
         result = metrics_calculator._check_readme_files()
-        
+
         self.assertIn('checks', result)
         # 即使有異常也應該返回結果
 

@@ -40,10 +40,10 @@ class TestProjectGeneratorExtended(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         pyproject_file = self.output_dir / "core" / "pyproject.toml"
         self.assertTrue(pyproject_file.exists())
         content = pyproject_file.read_text(encoding='utf-8')
@@ -64,10 +64,10 @@ class TestProjectGeneratorExtended(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         package_file = self.output_dir / "frontend" / "package.json"
         self.assertTrue(package_file.exists())
         content = package_file.read_text(encoding='utf-8')
@@ -88,10 +88,10 @@ class TestProjectGeneratorExtended(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         config_file = self.output_dir / "project" / "config.txt"
         self.assertTrue(config_file.exists())
         content = config_file.read_text(encoding='utf-8')
@@ -112,10 +112,10 @@ class TestProjectGeneratorExtended(unittest.TestCase):
                 }
             }
         }
-        
+
         generator = ProjectGenerator(str(self.output_dir))
         generator.generate(structure, "test_project")
-        
+
         main_file = self.output_dir / "project" / "main.py"
         self.assertTrue(main_file.exists())
         content = main_file.read_text(encoding='utf-8')

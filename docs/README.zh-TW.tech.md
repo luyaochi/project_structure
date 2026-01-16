@@ -9,6 +9,7 @@
 - 📄 為不同類型的文件生成模板（Python、Markdown、配置文件等）
 - 🎯 支援註解和說明
 - 🧪 支援乾跑模式（dry-run）預覽
+- 🌐 多語言報告生成（英文、簡體中文、繁體中文）
 
 ## 安裝
 
@@ -51,6 +52,55 @@ python -m src.main \
   --output output \
   --project-name my_project \
   --dry-run
+```
+
+### 生成專案並自動生成報告
+
+```bash
+# 生成專案並生成繁體中文報告（預設）
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports
+
+# 生成專案並生成所有語言版本的報告
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --all-langs
+
+# 生成專案並生成簡體中文報告
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --report-lang zh-CN
+
+# 生成專案並指定報告輸出目錄
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --report-output reports
+```
+
+### 直接生成報告（不生成專案）
+
+```bash
+# 直接生成所有語言版本的報告
+python -m src.main \
+  --structure structure_example.md \
+  --generated output \
+  --generate-reports \
+  --all-langs
+
+# 直接生成英文報告
+python -m src.main \
+  --structure structure_example.md \
+  --generated output \
+  --generate-reports \
+  --report-lang en
 ```
 
 ## README.md 格式說明
@@ -154,15 +204,89 @@ output/
 
 生成器包含完整的驗證指標系統，可以評估生成結果的質量：
 
-```bash
-# 生成專案
-python -m src.main --readme structure_example.md --output my_project
+### 使用 main.py 生成報告
 
-# 生成驗證指標報告
+```bash
+# 生成專案並自動生成報告
+python -m src.main \
+  --readme structure_example.md \
+  --output my_project \
+  --generate-reports \
+  --all-langs
+```
+
+### 使用獨立的報告生成器
+
+```bash
+# 生成指標報告（繁體中文，預設）
 python -m src.generate_metrics \
   --structure structure_example.md \
   --generated my_project \
   --output METRICS.md
+
+# 生成指標報告（所有語言版本）
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output METRICS.md \
+  --all-langs
+
+# 生成指標報告（簡體中文）
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output METRICS.md \
+  --lang zh-CN
+
+# 生成指標報告（英文）
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output METRICS.md \
+  --lang en
+
+# 生成 JSON 格式報告
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output metrics.json \
+  --json
+```
+
+### 生成驗證報告
+
+```bash
+# 生成驗證報告（所有語言版本）
+python -m src.generate_verification \
+  --structure structure_example.md \
+  --generated my_project \
+  --output VERIFICATION.md \
+  --all-langs
+
+# 生成驗證報告（單一語言）
+python -m src.generate_verification \
+  --structure structure_example.md \
+  --generated my_project \
+  --output VERIFICATION.md \
+  --lang zh-CN
+```
+
+### 生成結論報告
+
+```bash
+# 生成結論報告（所有語言版本）
+python -m src.generate_conclusion \
+  --structure structure_example.md \
+  --generated my_project \
+  --output CONCLUSION.md \
+  --all-langs
+
+# 生成結論報告（單一語言）
+python -m src.generate_conclusion \
+  --structure structure_example.md \
+  --generated my_project \
+  --output CONCLUSION.md \
+  --lang en
 ```
 
 ### 指標類別
@@ -177,19 +301,28 @@ python -m src.generate_metrics \
 
 詳細指標報告會生成在 `METRICS.md` 文件中。
 
+### 多語言支援
+
+所有報告都支援三種語言：
+- 繁體中文（zh-TW）- 預設，檔案名為 `METRICS.md`
+- 簡體中文（zh-CN）- 檔案名為 `METRICS.zh-CN.md`
+- 英文（en）- 檔案名為 `METRICS.en.md`
+
+報告預設會生成到 `reports/` 目錄中，可以使用 `--report-output` 參數指定其他目錄。
+
 ## 開發
 
 ```bash
 # 安裝開發依賴
 pip install -e ".[dev]"
 
-# 運行測試（如果有的話）
+# 運行測試
 pytest
+
+# 運行測試並生成覆蓋率報告
+pytest --cov=src --cov-report=html
 ```
 
 ## 授權
 
 MIT License
-```
-
----

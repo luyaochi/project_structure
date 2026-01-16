@@ -25,7 +25,7 @@ project/
 """
         test_file = Path(__file__).parent / "test_empty_else.md"
         test_file.write_text(structure_content, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(test_file))
             structure = parser.parse()
@@ -47,7 +47,7 @@ project/
 ```"""
         test_file = Path(__file__).parent / "test_plain_text.md"
         test_file.write_text(structure_content, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(test_file))
             structure = parser.parse()
@@ -67,7 +67,7 @@ project/
 ```"""
         test_file = Path(__file__).parent / "test_path_features.md"
         test_file.write_text(structure_content, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(test_file))
             structure = parser.parse()

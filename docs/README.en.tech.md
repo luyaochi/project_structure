@@ -1,67 +1,50 @@
-好，下面是你**剛剛那一整份內容的「完整、等價、可直接使用」簡體中文版本**。
-你可以**直接整段複製**，存成：
+# Project Structure Generator
 
-```
-docs/README.zh-CN.md
-```
+Automatically generate complete project directories and files based on tree structure descriptions in README.md.
 
-即可。
+## Features
 
----
+- 📖 Parse tree structure diagrams in README.md
+- 🔨 Automatically generate directory structures
+- 📄 Generate templates for different file types (Python, Markdown, config files, etc.)
+- 🎯 Support annotations and descriptions
+- 🧪 Support dry-run mode for preview
+- 🌐 Multi-language report generation (English, Simplified Chinese, Traditional Chinese)
 
-````markdown
-# 项目结构生成器
-
-根据 README.md 中的树状结构描述，自动生成完整的项目目录和文件。
-
----
-
-## 功能特色
-
-- 📖 解析 README.md 中的树状结构图
-- 🔨 自动生成目录结构
-- 📄 为不同类型的文件生成模板（Python、Markdown、配置文件等）
-- 🎯 支持注释和说明
-- 🧪 支持预览模式（dry-run）
-
----
-
-## 安装
+## Installation
 
 ```bash
-# 安装依赖（如有需要）
+# Install dependencies (if needed)
 pip install -e .
-````
+```
 
----
+## Usage
 
-## 使用方法
-
-### 基本使用
+### Basic Usage
 
 ```bash
 python -m src.main
 ```
 
-### 指定 README 文件
+### Specify README File
 
 ```bash
 python -m src.main --readme my_structure.md
 ```
 
-### 指定输出目录
+### Specify Output Directory
 
 ```bash
 python -m src.main --output ./my_project
 ```
 
-### 预览模式（不实际创建文件）
+### Preview Mode (Dry-run)
 
 ```bash
 python -m src.main --dry-run
 ```
 
-### 完整参数示例
+### Complete Parameters
 
 ```bash
 python -m src.main \
@@ -71,13 +54,60 @@ python -m src.main \
   --dry-run
 ```
 
----
+### Generate Project and Auto-generate Reports
 
-## README.md 格式说明
+```bash
+# Generate project and generate English reports (default)
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports
 
-生成器会解析 README.md 中的树状结构，支持以下格式：
+# Generate project and generate all language versions of reports
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --all-langs
 
-```text
+# Generate project and generate Simplified Chinese reports
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --report-lang zh-CN
+
+# Generate project and specify report output directory
+python -m src.main \
+  --readme structure_example.md \
+  --output output \
+  --generate-reports \
+  --report-output reports
+```
+
+### Generate Reports Directly (Without Generating Project)
+
+```bash
+# Generate all language versions of reports directly
+python -m src.main \
+  --structure structure_example.md \
+  --generated output \
+  --generate-reports \
+  --all-langs
+
+# Generate English reports directly
+python -m src.main \
+  --structure structure_example.md \
+  --generated output \
+  --generate-reports \
+  --report-lang en
+```
+
+## README.md Format
+
+The generator parses tree structures in README.md, supporting the following format:
+
+```
 system/
 └─ project1/
    ├─ README.md
@@ -86,7 +116,7 @@ system/
    │  └─ decisions/
    │     └─ adr_001.md
    │
-   ├─ core/                          ← 🧠 业务核心（可独立为套件）
+   ├─ core/                          ← 🧠 Business Core (standalone package)
    │  ├─ README.md
    │  ├─ pyproject.toml
    │  └─ src/
@@ -95,77 +125,62 @@ system/
    │        └─ errors.py
 ```
 
----
+### Format Rules
 
-## 格式规则
+1. Use tree symbols: `├─`, `└─`, `│` to represent hierarchy
+2. Support annotations: Use `←` symbol to add descriptions
+3. Auto-detect file types: Determine files or directories based on extensions
+4. Auto-generate templates: Generate initial templates for `.py`, `.md`, `pyproject.toml`, `package.json`, etc.
 
-1. 使用树状符号：`├─`, `└─`, `│` 表示层级关系
-2. 支持注释：使用 `←` 符号添加说明
-3. 自动识别文件类型：根据扩展名判断是文件或目录
-4. 自动生成模板：为 `.py`、`.md`、`pyproject.toml`、`package.json` 等生成初始模板
+## Generated File Types
 
----
+### Python Files (.py)
+Generate Python file templates with basic structure.
 
-## 生成的文件类型
-
-### Python 文件（.py）
-
-生成包含基础结构的 Python 文件模板。
-
-### Markdown 文件（.md）
-
-生成包含标题和注释说明的 Markdown 文件。
+### Markdown Files (.md)
+Generate Markdown files with titles and annotations.
 
 ### pyproject.toml
-
-为 Python 项目生成标准的 `pyproject.toml` 配置文件。
+Generate standard `pyproject.toml` configuration files for Python projects.
 
 ### package.json
-
-为前端项目生成 `package.json` 配置文件。
+Generate `package.json` configuration files for frontend projects.
 
 ### README.md
+Automatically generate README.md files for each directory.
 
-为每个目录自动生成对应的 README.md 说明文件。
+## Project Structure
 
----
-
-## 项目结构
-
-```text
+```
 .
-├── README.md                 # 本文件
-├── pyproject.toml            # Python 项目配置
-├── .gitignore                # Git 忽略文件
+├── README.md              # This file
+├── pyproject.toml         # Python project configuration
+├── .gitignore            # Git ignore file
 └── src/
-    ├── main.py               # 主程序入口
-    ├── structure_parser.py   # 结构解析器
-    └── project_generator.py  # 项目生成器
+    ├── main.py           # Main program entry
+    ├── structure_parser.py  # Structure parser
+    └── project_generator.py # Project generator
 ```
 
----
+## Examples
 
-## 示例
+The project includes a complete example structure file `structure_example.md` that demonstrates complex project structures.
 
-项目中包含一个完整的示例结构文件 `structure_example.md`，用于展示较复杂的项目结构。
-
-### 快速测试
+### Quick Test
 
 ```bash
-# 使用示例结构文件生成项目
+# Generate project using example structure file
 python -m src.main --readme structure_example.md --output my_project
 
-# 预览将要生成的结构（不实际创建文件）
+# Preview structure to be generated (without actually creating files)
 python -m src.main --readme structure_example.md --dry-run
 ```
 
----
+### Simple Example
 
-### 简单示例
+If your structure file contains:
 
-假设你的结构文件包含：
-
-```text
+```
 my_project/
 ├─ src/
 │  └─ main.py
@@ -173,9 +188,9 @@ my_project/
    └─ test_main.py
 ```
 
-执行生成器后，将创建：
+After running the generator, it will create:
 
-```text
+```
 output/
 └─ my_project/
    ├─ README.md
@@ -185,56 +200,123 @@ output/
       └─ test_main.py
 ```
 
----
+## Verification Metrics
 
-## 验证指标
+The generator includes a complete verification metrics system to evaluate the quality of generated results:
 
-生成器包含完整的验证指标系统，用于评估生成结果的质量：
+### Using main.py to Generate Reports
 
 ```bash
-# 生成项目
-python -m src.main --readme structure_example.md --output my_project
+# Generate project and auto-generate reports
+python -m src.main \
+  --readme structure_example.md \
+  --output my_project \
+  --generate-reports \
+  --all-langs
+```
 
-# 生成验证指标报告
+### Using Standalone Report Generators
+
+```bash
+# Generate metrics report (English)
 python -m src.generate_metrics \
   --structure structure_example.md \
   --generated my_project \
-  --output METRICS.md
+  --output METRICS.md \
+  --lang en
+
+# Generate metrics report (all language versions)
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output METRICS.md \
+  --all-langs
+
+# Generate metrics report (Simplified Chinese)
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output METRICS.md \
+  --lang zh-CN
+
+# Generate JSON format report
+python -m src.generate_metrics \
+  --structure structure_example.md \
+  --generated my_project \
+  --output metrics.json \
+  --json
 ```
 
----
-
-### 指标类别
-
-1. **结构覆盖率**：评估目录和文件的覆盖情况
-2. **文件覆盖率**：评估预期文件的生成情况
-3. **目录覆盖率**：评估预期目录的生成情况
-4. **模板准确性**：评估生成文件的模板质量
-5. **层级准确性**：评估三层结构（项目 / 模块 / 功能）的正确性
-6. **注释保留率**：评估注释说明的保留情况
-7. **模块独立性**：评估各模块之间的独立程度
-
-详细的指标报告将生成在 `METRICS.md` 文件中。
-
----
-
-## 开发
+### Generate Verification Report
 
 ```bash
-# 安装开发依赖
+# Generate verification report (all language versions)
+python -m src.generate_verification \
+  --structure structure_example.md \
+  --generated my_project \
+  --output VERIFICATION.md \
+  --all-langs
+
+# Generate verification report (single language)
+python -m src.generate_verification \
+  --structure structure_example.md \
+  --generated my_project \
+  --output VERIFICATION.md \
+  --lang en
+```
+
+### Generate Conclusion Report
+
+```bash
+# Generate conclusion report (all language versions)
+python -m src.generate_conclusion \
+  --structure structure_example.md \
+  --generated my_project \
+  --output CONCLUSION.md \
+  --all-langs
+
+# Generate conclusion report (single language)
+python -m src.generate_conclusion \
+  --structure structure_example.md \
+  --generated my_project \
+  --output CONCLUSION.md \
+  --lang en
+```
+
+### Metric Categories
+
+1. **Structure Coverage** - Evaluate directory and file coverage
+2. **File Coverage** - Evaluate expected file generation
+3. **Directory Coverage** - Evaluate expected directory generation
+4. **Template Accuracy** - Evaluate template quality of generated files
+5. **Hierarchy Accuracy** - Evaluate three-level structure (project/module/feature) correctness
+6. **Annotation Preservation** - Evaluate annotation retention
+7. **Module Independence** - Evaluate independence of each module
+
+Detailed metric reports will be generated in `METRICS.md` files.
+
+### Multi-language Support
+
+All reports support three languages:
+- Traditional Chinese (zh-TW) - Default, filename: `METRICS.md`
+- Simplified Chinese (zh-CN) - Filename: `METRICS.zh-CN.md`
+- English (en) - Filename: `METRICS.en.md`
+
+Reports are generated in the `reports/` directory by default. You can use the `--report-output` parameter to specify a different directory.
+
+## Development
+
+```bash
+# Install development dependencies
 pip install -e ".[dev]"
 
-# 运行测试（如有）
+# Run tests
 pytest
+
+# Run tests with coverage
+pytest --cov=src --cov-report=html
 ```
 
----
-
-## 授权
+## License
 
 MIT License
-
-```
-
----
-

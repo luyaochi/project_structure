@@ -20,7 +20,7 @@ class TestMainComprehensive(unittest.TestCase):
         self.temp_dir = Path(tempfile.mkdtemp())
         self.structure_file = self.temp_dir / "structure.md"
         self.generated_dir = self.temp_dir / "generated"
-        
+
         structure_content = """```
 project/
 ├─ src/
@@ -28,7 +28,7 @@ project/
 └─ README.md
 ```"""
         self.structure_file.write_text(structure_content, encoding='utf-8')
-        
+
         self.generated_dir.mkdir()
         (self.generated_dir / "project").mkdir()
         (self.generated_dir / "project" / "src").mkdir()
@@ -48,7 +48,7 @@ project/
         """測試使用 --structure 參數"""
         from main import main
         import sys
-        
+
         test_args = [
             'main.py',
             '--readme', str(self.structure_file),
@@ -57,7 +57,7 @@ project/
             '--structure', str(self.structure_file),
             '--report-lang', 'en'
         ]
-        
+
         with patch.object(sys, 'argv', test_args):
             try:
                 main()
@@ -68,13 +68,13 @@ project/
         """測試文件不存在錯誤"""
         from main import main
         import sys
-        
+
         test_args = [
             'main.py',
             '--readme', 'nonexistent_file.md',
             '--output', str(self.temp_dir / "output")
         ]
-        
+
         with patch.object(sys, 'argv', test_args):
             try:
                 main()

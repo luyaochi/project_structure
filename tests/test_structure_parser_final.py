@@ -25,7 +25,7 @@ project/
 ```"""
         text_file = Path(__file__).parent / "test_stop_text.md"
         text_file.write_text(structure_with_text, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(text_file))
             structure = parser.parse()
@@ -44,7 +44,7 @@ project/
 ```"""
         arrow_file = Path(__file__).parent / "test_arrow_continue.md"
         arrow_file.write_text(structure_with_arrow, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(arrow_file))
             structure = parser.parse()
@@ -64,7 +64,7 @@ project/
 """
         empty_file = Path(__file__).parent / "test_empty_outside.md"
         empty_file.write_text(structure_with_empty, encoding='utf-8')
-        
+
         try:
             parser = StructureParser(str(empty_file))
             structure = parser.parse()
