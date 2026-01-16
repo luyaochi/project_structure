@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_backend"
+
+[project]
+name = "project-structure-generator"
+version = "0.1.0"
+description = "根據 README.md 中的結構描述生成專案目錄和文件"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=22.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+generate-project = "src.main:main"
