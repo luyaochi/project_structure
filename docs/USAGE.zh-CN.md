@@ -1,14 +1,3 @@
-好，下面是你這一整段 **「使用指南」的完整、專業、可直接使用的簡體中文版本**。
-語氣是**技术文档 / 使用说明**，不是直译腔，适合放在：
-
-* `docs/USAGE.zh-CN.md`
-* 或 `docs/README.zh-CN.md` 的 Usage 部分
-
-你可以**原封不动复制使用**。
-
----
-
-````markdown
 # 使用指南
 
 ## 快速开始
@@ -27,7 +16,7 @@ system/
    └─ backend/
       └─ api/
          └─ routes.py
-````
+```
 
 ### 2. 运行生成器
 
@@ -96,9 +85,5 @@ def _load_templates(self) -> Dict[str, str]:
 ```bash
 python -m src.main --project-name my_custom_project
 ```
-
-```
-
----
 
 

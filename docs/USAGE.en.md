@@ -1,10 +1,3 @@
-好，下面是你這一整段 **「使用指南」的專業英文版本**，語氣偏 **technical documentation / user guide**，可直接放在 `docs/USAGE.md`、`docs/README.en.md` 的 Usage 區塊，或主 README 的下半段。
-
-你可以**原封不動複製使用**。
-
----
-
-````markdown
 # Usage Guide
 
 ## Quick Start
@@ -23,7 +16,7 @@ system/
    └─ backend/
       └─ api/
          └─ routes.py
-````
+```
 
 ### 2. Run the Generator
 
@@ -93,10 +86,6 @@ def _load_templates(self) -> Dict[str, str]:
 python -m src.main --project-name my_custom_project
 ```
 
-```
 
----
-
-### ✅ 小確認（幫你定錨）
 
 

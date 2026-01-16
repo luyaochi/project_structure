@@ -1,8 +1,4 @@
 
-
----
-
-````markdown
 # 🚀 Project Structure Generator
 
 **Let AI design the architecture. Let this tool make it real.**
@@ -48,7 +44,7 @@ It turns tree-style structures written in `README.md` into real, executable proj
 3. **Generate**
    ```bash
    python -m src.main --readme structure.md --output ./my_new_project
-````
+   ```
 
 ### 📂 Built-in Best Practices
 
@@ -125,10 +121,3 @@ This tool is more than a generator—it helps prevent **architectural drift** du
 
 Released under the **MIT License**.
 Forks and contributions are welcome!
-
-```
-
----
-
-
-```
