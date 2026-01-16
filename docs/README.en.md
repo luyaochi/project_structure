@@ -1,4 +1,5 @@
 
+
 ---
 
 ````markdown
@@ -9,7 +10,7 @@
 Have you ever asked an AI to design a perfect project architecture—
 only to spend the next 30 minutes manually creating folders and boilerplate files?
 
-**Project Structure Generator** is a tool built for **Documentation-Driven Development (DDD)**.
+**Project Structure Generator** is built for **Documentation-Driven Development (DDD)**.
 It turns tree-style structures written in `README.md` into real, executable project skeletons—instantly.
 
 ---
@@ -26,9 +27,9 @@ It turns tree-style structures written in `README.md` into real, executable proj
   Automatically detects file extensions and generates meaningful boilerplate for
   `.py`, `.md`, `pyproject.toml`, and `package.json`.
 
-- **🛡️ Quality Assurance Built-in**
-  Includes **dry-run preview mode** and a **metrics system** to ensure the generated structure
-  faithfully matches the original design.
+- **🛡️ Built-in Quality Assurance**
+  Includes **dry-run preview mode** and an **architecture metrics system** to ensure
+  the generated structure faithfully matches the original design.
 
 - **🧠 Annotation Preservation**
   Extracts `← annotations` and converts them into file-level documentation or README headers.
@@ -48,6 +49,23 @@ It turns tree-style structures written in `README.md` into real, executable proj
    ```bash
    python -m src.main --readme structure.md --output ./my_new_project
 ````
+
+### 📂 Built-in Best Practices
+
+The tool includes **ready-to-use, language-specific reference architectures**.
+You can directly copy any of the following structures into your `README.md`:
+
+* **C++ Enterprise-Grade Structure**
+  Follows strict Header / Source separation conventions.
+
+* **Rust Standard Library / Binary Layout**
+  Aligned with Cargo ecosystem best practices.
+
+* **Modern Frontend (Vite) Architecture**
+  Clear separation of Services / Stores / Components.
+
+* **Large-Scale Layered System**
+  Suitable for monorepos or complex business domains.
 
 4. **Verify**
    Generate metrics to ensure architectural integrity.
@@ -93,7 +111,7 @@ This tool is more than a generator—it helps prevent **architectural drift** du
 ## 🗺️ Roadmap
 
 * [ ] **Multi-language Support**
-  Built-in templates for Go, Rust, and TypeScript.
+  Built-in templates for more languages (Go, Rust, TypeScript).
 
 * [ ] **AI API Integration**
   Generate architecture suggestions directly from the CLI using LLMs.
@@ -112,3 +130,5 @@ Forks and contributions are welcome!
 
 ---
 
+
+```

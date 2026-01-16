@@ -3,10 +3,9 @@
 # 🚀 Project Structure Generator
 
 > **Turn AI-designed architectures into real-world project skeletons in seconds.**
-<sub>
-讓 AI 負責設計架構，讓本工具負責落地執行。
-让 AI 负责设计架构，让本工具负责落地执行。
-</sub>
+> **讓 AI 負責設計架構，讓本工具負責落地執行。**
+> **让 AI 负责设计架构，让本工具负责落地执行。**
+
 
 ---
 
@@ -76,9 +75,5 @@ MIT License
 
 ---
 
-### 💡 這樣調整的好處：
 
-1. **資訊對稱**：不管使用者講什麼語言，他們都能在主頁看到表格（Feature）和代碼塊（Quick Start），這在全球通用的開發者圈子裡是非常直觀的。
-2. **SEO 與 關鍵字**：在主頁保留一些英文關鍵字（如 Smart Templates, AI Powered）有助於 GitHub 的搜尋排名。
-3. **引流效果**：簡單的快速預覽會讓使用者更有動力點進去 `docs/README.zh-TW.md` 看詳細說明。
 
