@@ -1,7 +1,3 @@
-
----
-
-````markdown
 # 🚀 Project Structure Generator
 
 > **Turn AI-designed architectures into real-world project skeletons in seconds.**
@@ -41,7 +37,7 @@ my_project/
 │  └─ main.py
 └─ tests/
    └─ test_main.py
-````
+```
 
 ---
 
@@ -90,9 +86,5 @@ pip install -e .
 ## 📄 License
 
 MIT License
-
-```
-
----
 
 
