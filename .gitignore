@@ -19,10 +19,15 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Pytest
 .pytest_cache/
 
-#coverage
+# Coverage
 .coverage
+.coverage.*
+htmlcov/
+coverage.xml
 
 # Virtual Environment
 venv/
